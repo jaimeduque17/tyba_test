@@ -24,8 +24,10 @@ class _RecordsViewState extends State<RecordsView> {
           Expanded(
             flex: 1,
             child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream:
-                  FirebaseFirestore.instance.collection('records').snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('records')
+                  .orderBy('createdAt', descending: true)
+                  .snapshots(),
               builder: (context, querySnapshop) {
                 if (querySnapshop.connectionState == ConnectionState.active) {
                   List<QueryDocumentSnapshot<Map<String, dynamic>>> items =
