@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:tyba_test/ui/views/navigation.dart';
 import 'package:tyba_test/ui/views/login.dart';
 
 class SignupView extends StatefulWidget {
@@ -10,6 +12,102 @@ class SignupView extends StatefulWidget {
 }
 
 class _SignupViewState extends State<SignupView> {
+  final auth = FirebaseAuth.instance;
+  String _email = '';
+  String _password = '';
+
+  Future<void> onPressedSignup() async {
+    try {
+      await auth.createUserWithEmailAndPassword(
+          email: _email, password: _password);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const NavigationView(),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(
+            '¡Bienvenido, cuenta creada exitosamente!',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    } catch (e) {
+      if (e is FirebaseAuthException) {
+        if (e.code == 'email-already-in-use') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Row(
+                children: const [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 20.0),
+                  Expanded(
+                    child: Text(
+                      'Email en uso, utiliza otro',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else if (e.code == 'invalid-email') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Row(
+                children: const [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 20.0),
+                  Expanded(
+                    child: Text(
+                      'Email inválido',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Colors.red,
+              content: Row(
+                children: const [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 20.0),
+                  Expanded(
+                    child: Text(
+                      'Completa todos los campos',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +144,11 @@ class _SignupViewState extends State<SignupView> {
                 child: TextField(
                   cursorColor: Colors.white,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      _email = value.trim();
+                    });
+                  },
                   style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -67,7 +169,11 @@ class _SignupViewState extends State<SignupView> {
                 child: TextField(
                   cursorColor: Colors.white,
                   obscureText: true,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    setState(() {
+                      _password = value.trim();
+                    });
+                  },
                   style: const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                     enabledBorder: OutlineInputBorder(
@@ -98,7 +204,7 @@ class _SignupViewState extends State<SignupView> {
                       Colors.white.withOpacity(0.1),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: onPressedSignup,
                   child: Row(
                     children: const [
                       Expanded(
