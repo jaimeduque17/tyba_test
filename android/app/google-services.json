@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "453805148715",
+    "project_id": "pruebaflutter-5e057",
+    "storage_bucket": "pruebaflutter-5e057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453805148715:android:140cfdaf4f5c035c61786e",
+        "android_client_info": {
+          "package_name": "com.example.tyba_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453805148715-hr114am98edro5qn0djdp2203fguma3p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL1YYDSkYOLhKU-9k1giTDJ04NAiQzSIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453805148715-hr114am98edro5qn0djdp2203fguma3p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
