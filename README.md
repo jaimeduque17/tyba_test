@@ -10,6 +10,21 @@ Proyecto desarrollado con Flutter con las siguientes funcionalidades:
 5. Registro de las búsquedas hechas por el usuario.
 6. Logout de usuario.
 
+## Screenshots
+<div style="display:flex;flex-direction:row;justify-content: space-between">
+    <img src="screenshots/login.jpeg" alt="login" height="300" />
+    <img src="screenshots/signup.jpeg" alt="signup" height="300" />
+    <img src="screenshots/home.jpeg" alt="home" height="300" />
+    <img src="screenshots/searchByCity.jpeg" alt="searchByCity" height="300" />
+</div>
+
+<div style="display:flex;flex-direction:row;justify-content: space-between">
+    <img src="screenshots/onLocation.jpeg" alt="onLocation" height="300" />
+    <img src="screenshots/searchByLocation.jpeg" alt="searchByLocation" height="300" />
+    <img src="screenshots/records.jpeg" alt="records" height="300" />
+    <img src="screenshots/logout.jpeg" alt="logout" height="300" />
+</div>
+
 
 ## Introducción e instalación
 Estas instrucciones le proporcionarán una copia del proyecto en funcionamiento en su máquina local con fines de prueba.
