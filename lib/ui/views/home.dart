@@ -13,6 +13,10 @@ class _HomeViewState extends State<HomeView> {
 
   void onPressedSearch() async {
     setState(() {});
+    await FirebaseFirestore.instance.collection('records').doc().set({
+      'value': searchValue,
+      'createdAt': DateTime.now().millisecondsSinceEpoch
+    });
   }
 
   @override
@@ -73,7 +77,7 @@ class _HomeViewState extends State<HomeView> {
 
                   List<QueryDocumentSnapshot<Map<String, dynamic>>>
                       filteredItems = [];
-                  if (searchValue.isNotEmpty && searchValue.length > 3) {
+                  if (searchValue.isNotEmpty && searchValue.length > 2) {
                     filteredItems = items.where((element) {
                       return (element['ciudad'] as String)
                           .toLowerCase()
